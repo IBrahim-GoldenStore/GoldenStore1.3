@@ -1,0 +1,77 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'onlineStore/style.css' %}">
+    <title>Document</title>
+</head>
+<body>
+
+    <header>
+        <div class="logo">GoldenStore.</div>
+        <div class="menu-bar"></div>
+            <div class="search-bar">
+                <form method="get" action="{% url 'store:index' %}" class="index-form"> <!-- formulaire necessaire pour recuprerez le valeur notez qu'ici nous avons le method get -->
+                    <input type="search" name="contain" placeholder="Recherche......">
+                    <button type="submit"><img src="{% static 'onlineStore/icone/search.png' %}"></button>
+                </form>
+            </div>
+        <nav>
+            <a href="">Acceuil</a>
+            <a href="{% url 'store:panier' %}">Panier</a>
+            {% if user.is_authenticated  %}
+                <a href="{% url 'account:logout' %}">Connectez</a>
+            {% else %}
+                <a href="{% url 'account:login' %}">Connexion</a>
+            {% endif %}                
+            <a href="{% url 'store:prods' %}">Articles</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="category-box">
+            <p>Catégorie</p>
+            <div class="category-bar">
+                <p class="scroll"></p>
+                {% for categorie in category %}                    
+                <div style="background-image:url('{{ categorie.image.url }}')"><a href="{% url 'store:trend' categorie.name %}">{{categorie.name}}</a></div>
+                {% endfor %}                     
+                <p class="scroll_next"></p>
+            </div>
+        </section>
+
+        <section style="padding: 20px;" class="trend-box">
+            <p>Tendances</p>
+            <div class="trend-bar">              
+                {% if products %}
+                    {% for produit in products %}
+                        <div>
+                            {% if produit.image %}
+                                <img src="{{ produit.image.url}}">
+                            {% endif %}                     
+                            <section class="trend-info">
+                                <a href="{% url 'store:article' produit.slug %}">{{ produit.name }}</a><br>
+                                <h4 style="font-weight: 500;">{{ produit.price }} FCFA</h4>
+                            </section>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>Articles non disponibles</p>
+                {% endif %}
+                    
+        </section>
+    </main>
+    <footer>
+        Retrouvez-nous sur:
+        <div class="external-link">
+            <p>Instagram : </p>
+            <p>whatsapp : </p>
+        </div>
+    </footer>
+<script src="{% static 'onlineStore/scripts.js' %}"></script>
+</body>
+</html>
