@@ -68,8 +68,8 @@ header{
 .search-bar{
     border-radius:10px ;
     padding:3px 5px;
-    background-color: #999;
     width: 200px;
+    box-shadow: 1px 2px 5px rgba(0,0,0,0.4);
 }
 .search-bar input{
     border: none;
@@ -235,8 +235,10 @@ footer{
     height: fit-content;
     margin-top: 10px;
     background-color: #1e2022;
-    position: relative;
+    position: absolute;
     bottom: 0;
+    left: 0;
+    right: 0;
     color: #999;
     padding: 3px;
 }
