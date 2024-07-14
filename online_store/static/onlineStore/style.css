@@ -93,7 +93,7 @@ header{
 }
 header nav {
     display: flex;
-    gap: 50px;
+    gap: 20px;
 }
 header nav a{
     text-decoration: none;
