@@ -13,12 +13,24 @@ from django.contrib.auth.decorators import login_required
  # recuperation des differents produits
 def index(request):
     category= Category.objects.all()
-    top_category= Products.objects.filter(top_category=1)
+
+    category_list= Category.objects.all()
+    produit_list= Products.objects.all()
+
+
     search= request.GET.get('contain') # recuperation de la valeur via son nom dans le formulaire
-    if search !="" and search is not None: # verification
-        top_category= Products.objects.filter(name__icontains=search,top_category=1)  # flitrez les donnees selon la valeur rentrez notez que <__icontains> s'utilise sur le champs qui doit etre verifie sans intermediaire du point
+    if search !="" and search is not None:# verification
+        produit_list= Products.objects.filter(name__icontains=search,top_category=1)  # flitrez les donnees selon la valeur rentrez notez que <__icontains> s'utilise sur le champs qui doit etre verifie sans intermediaire du point
+
+    context= {
+        'category': category,
+        'category_list': category_list,
+        'produit_list': produit_list
+
+    }
+
+    return render(request, 'onlineStore/index.html',context)
     
-    return render(request, 'onlineStore/index.html',{'products': top_category,'category': category})
 
 def produit(request):
     category_list= Category.objects.all()
@@ -37,7 +49,6 @@ def produit(request):
     }
 
     return render(request,'onlineStore/produits.html',context)
-
 
 # recuperation d'un article 
 def article(request,id_prod):

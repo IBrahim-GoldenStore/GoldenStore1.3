@@ -1,28 +1,5 @@
 {% load static %}
 {% include './include/header.html' %}
- <!-- section header -->
- <section class="header">
-    <div class="logo">
-        <h1>G</h1><h1>o</h1><h1>l</h1><h1>d</h1><h1>e</h1><h1>n</h1>
-        <h1>S</h1><h1>tore.</h1>
-    </div>
-    <div class="nav">
-        <div class="links">
-            <a href="{% url 'store:index' %}">Acceuil</a>
-            {% if user.is_authenticated %}
-                <a href="{% url 'account:logout' %}">{{ user.username }}</a>
-            {% else %}
-                <a href="{% url 'account:login' %}">Se connectez</a>
-            {% endif %}
-            <a href="{% url 'store:panier' %}">Panier</a>
-
-        </div>
-        <div class="menu_list"></div>
-    </div>
-
-</section>
-
-
 
 <section class="global">
 
@@ -33,13 +10,6 @@
         </div>
 
 <!-- Nous contactez -->
-    <p class="infos_title">Contactez nous</p>
-    <div class="social_link">
-        <p class="name"><img src="{% static 'account/icone/whatsapp.png' %}" alt="Whatsapp"> <span>Whatsapp:</span> <a href="#"> Bientôt...</a></p>
-        <p class="name"><img src="{% static 'account/icone/instagram.png' %}" alt="Instagram"> <span>Instagram:</span> <a href="#"> Bientôt...</a></p>
-        <p class="name"><img src="{% static 'account/icone/facebook2.png' %}" alt="Facebook"> <span>Facebook:</span> <a href="#"> Bientôt...</a></p>
-    </div>
-
         <div class="msg_form">
             <form method="post" >
                 {% csrf_token %}
@@ -47,8 +17,9 @@
                 <button type="submit">Envoyer</button>
             </form>
         </div>
-    
-    <h3 style="text-align:left;width: 100%;">Avis des utilisateurs</h3>
+
+    <a href="{% url 'store:index' %}" style="text-decoration: none;color: red;font-weight: bold;"> Retour</a>
+    <h3 style="text-align:left;width: 100%;margin-top: 10px;">Avis des utilisateurs</h3>
     <div class="avis">
         {% if avis %}
         {% for avi in avis %}

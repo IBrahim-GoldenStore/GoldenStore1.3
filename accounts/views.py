@@ -4,7 +4,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import *
 from .models import *
-from random import randint
 
 # Create your views here.
 
@@ -57,7 +56,7 @@ def contacts(request):
             contenu= form_c.cleaned_data['message']
             message_base= Messages_site.objects.create(nom= name.capitalize(), e_mails= e_mail, message= contenu)
             message_base.save()
-            return redirect('store:index')
+            return redirect('account:cont')
     else:
         form_c= Message()
 

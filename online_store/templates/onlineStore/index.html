@@ -23,7 +23,7 @@
             <a href="">Acceuil</a>
             <a href="{% url 'store:panier' %}">Panier</a>
             {% if user.is_authenticated  %}
-                <a href="{% url 'account:logout' %}">Connectez</a>
+                <a href="{% url 'account:logout' %}">Connecté</a>
             {% else %}
                 <a href="{% url 'account:login' %}">Connexion</a>
             {% endif %}                
@@ -44,33 +44,40 @@
             </div>
         </section>
 
-        <section style="padding: 20px;" class="trend-box">
-            <p>Tendances</p>
-            <div class="trend-bar">              
-                {% if products %}
-                    {% for produit in products %}
+        {% if produit_list %}
+        {% for categorie in category_list %}
+            <section class="trend-box">
+                <p>Tendances: {{categorie.name}}</p>
+                <div class="trend-bar">
+                    {% for produit in produit_list %}
+                    {% if categorie.name == produit.category.name %}
+                    {% if produit.top_category == 1 %}
                         <div>
-                            {% if produit.image %}
-                                <img src="{{ produit.image.url}}">
-                            {% endif %}                     
+                            <img src="{{ produit.image.url }}" alt="">
                             <section class="trend-info">
-                                <a href="{% url 'store:article' produit.slug %}">{{ produit.name }}</a><br>
-                                <h4 style="font-weight: 500;">{{ produit.price }} FCFA</h4>
+                                <a href="{% url 'store:article' produit.slug %}">{{ produit.name }}</a>
+                                <span>{{ produit.price }} FCFA</span>
                             </section>
                         </div>
+                    {% endif %}
+                    {% endif %}
                     {% endfor %}
-                {% else %}
-                    <p>Articles non disponibles</p>
-                {% endif %}
-                    
-        </section>
+                </div>  
+            </section>
+        {% endfor %}
+        {% else %}
+            <p>Articles non disponibles</p>
+        {% endif %}
+
     </main>
     <footer>
         Retrouvez-nous sur:
         <div class="external-link">
             <p>Instagram : </p>
             <p>whatsapp : </p>
+            <p>facebook : </p>
         </div>
+        <a href="{% url 'account:cont' %}" style="text-align: center; color: #999;width: 100%;display: block;margin-top: 5px;">À propos de nous</a>
     </footer>
 <script src="{% static 'onlineStore/scripts.js' %}"></script>
 </body>

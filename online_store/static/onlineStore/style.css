@@ -111,6 +111,9 @@ main p{
     font-size: 30px;
     margin-bottom: 30px;
 }
+.category-box{
+    margin-bottom: 20px;
+}
 .category-bar{
     display: flex;
     width: 80%;
@@ -405,6 +408,7 @@ footer{
 .success_img p{
     margin-bottom: 10px;
     font-size: 18px;
+    text-align: center;
 }
 .success_img p span{
     font-size: 14px;
@@ -472,7 +476,8 @@ footer{
         flex-direction: column;
         justify-content: center;
         width: 60%;
-        height: 50vh;
+        height: fit-content;
+        padding: 12px 0;
     }
 /* menu-deroulant */
 /* index and produit */
@@ -481,6 +486,7 @@ footer{
     }
     main p{
         margin-bottom: 15px;
+        font-size: 27px;
     }
     .category-bar div{
         max-width: 200px;
@@ -489,7 +495,6 @@ footer{
     }
     .trend-box{
         padding: 0;
-        padding-bottom:20px ;
     }
     .trend-bar{
         gap: 40px;
